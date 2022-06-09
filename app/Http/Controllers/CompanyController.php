@@ -50,8 +50,7 @@ class CompanyController extends Controller
         }
 
         Company::create($data);
-        return redirect()->route('company.index')
-            ->with('success', 'Product created successfully.');
+        return redirect()->route('company.index');
     }
 
     /**
@@ -129,7 +128,7 @@ class CompanyController extends Controller
         ];
 
         return Validator::make($request->all(), [
-            'logo' => ['required', 'Mimes:jpeg,jpg,gif,png', 'dimensions:width=100,height=100']
+            'logo' => ['Mimes:jpeg,jpg,gif,png', 'dimensions:width=100,height=100']
         ], $message);
     }
 }

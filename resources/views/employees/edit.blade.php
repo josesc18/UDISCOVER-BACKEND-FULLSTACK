@@ -10,27 +10,27 @@
                 {{ method_field('PUT') }}
                 <div class="form-group mt-3">
                     <label for="name-input">Nombre</label>
-                    <input type="text" class="form-control" id="name-input" placeholder="Nombre" name="firstname" value="{{$employee->firstname}}">
+                    <input type="text" class="form-control" id="name-input" placeholder="Nombre" name="firstname" value="{{$employee->firstname}}" required>
                 </div>
                 <div class="form-group mt-3">
                     <label for="lastname-input">Apellido</label>
-                    <input type="text" class="form-control" id="lastname-input" placeholder="Apellido" name="lastname" value="{{$employee->lastname}}">
+                    <input type="text" class="form-control" id="lastname-input" placeholder="Apellido" name="lastname" value="{{$employee->lastname}}" required>
                 </div>
                 <div class=" form-group mt-3">
                     <label for="company-select">Compañia</label>
-                    <select class="form-control" name="company_id" id="company-select" value="{{$employee->company_id}}">
+                    <select class="form-control" name="company_id" id="company-select" value="{{$employee->company_id}}" required>
                         @foreach($companies as $company)
-                        <option value="{{ $company->id }}" {{ $company_id == $company->id ? 'selected' : '' }}>{{$company->name}}</option>
+                        <option value="{{ $company->id }}" {{ $employee->company_id == $company->id ? 'selected' : '' }}>{{$company->name}}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="form-group mt-3">
                     <label for="email-input">Correo</label>
-                    <input type="email" class="form-control" id="email-input" aria-describedby="emailHelp" placeholder="Enter email" name="email" value="{{$employee->email}}">
+                    <input type="email" class="form-control" id="email-input" aria-describedby="emailHelp" placeholder="Enter email" name="email" value="{{$employee->email}}" required>
                 </div>
                 <div class="form-group mt-3">
-                    <label for="lastname-input">Apellido</label>
-                    <input type="text" class="form-control" id="lastname-input" placeholder="Telefono" name="phone" value="{{$employee->phone}}">
+                    <label for="phone-input">Teléfono</label>
+                    <input type="text" class="form-control" id="phone-input" placeholder="Telefono" name="phone" value="{{$employee->phone}}" required>
                 </div>
                 <button type="submit" class="btn btn-primary mt-4 w-100">Guardar</button>
             </form>

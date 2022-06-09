@@ -41,8 +41,7 @@ class EmployeeController extends Controller
     {
         $data = $request->except("_token");
         Employee::create($data);
-        return redirect()->route('employee.index')
-            ->with('success', 'Product created successfully.');
+        return redirect()->route('employee.index');
     }
 
     /**

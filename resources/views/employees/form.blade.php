@@ -9,15 +9,15 @@
                 @csrf
                 <div class="form-group mt-3">
                     <label for="name-input">Nombre</label>
-                    <input type="text" class="form-control" id="name-input" placeholder="Nombre" name="firstname">
+                    <input type="text" class="form-control" id="name-input" placeholder="Nombre" name="firstname" required>
                 </div>
                 <div class="form-group mt-3">
                     <label for="lastname-input">Apellido</label>
-                    <input type="text" class="form-control" id="lastname-input" placeholder="Apellido" name="lastname">
+                    <input type="text" class="form-control" id="lastname-input" placeholder="Apellido" name="lastname" required>
                 </div>
                 <div class="form-group mt-3">
                     <label for="company-select">Compañia</label>
-                    <select class="form-control" name="company_id" id="company-select">
+                    <select class="form-control" name="company_id" id="company-select" required>
                         <option selected>Choose...</option>
                         @foreach($companies as $company)
                         <option value="{{$company->id}}">{{$company->name}}</option>
@@ -26,11 +26,11 @@
                 </div>
                 <div class="form-group mt-3">
                     <label for="email-input">Correo</label>
-                    <input type="email" class="form-control" id="email-input" aria-describedby="emailHelp" placeholder="Enter email" name="email">
+                    <input type="email" class="form-control" id="email-input" aria-describedby="emailHelp" placeholder="Enter email" name="email" require>
                 </div>
                 <div class="form-group mt-3">
-                    <label for="lastname-input">Apellido</label>
-                    <input type="text" class="form-control" id="lastname-input" placeholder="Telefono" name="phone">
+                    <label for="phone-input">Teléfono</label>
+                    <input type="text" class="form-control" id="phone-input" placeholder="Telefono" name="phone" required>
                 </div>
                 <button type="submit" class="btn btn-primary mt-4 w-100">Guardar</button>
             </form>
