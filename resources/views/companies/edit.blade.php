@@ -4,7 +4,14 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h1>Añadir Compañia</h1>
+            <h1>Editar Compañia</h1>
+            @if($errors->any())
+            <ul>
+                @foreach($errors->all() as $error)
+                <li>{{$error}}</li>
+                @endforeach
+            </ul>
+            @endif
             <form enctype="multipart/form-data" method="POST" action="{{ route('company.update', $tempCompany) }}">
                 @csrf
                 {{ method_field('PUT') }}
@@ -17,7 +24,7 @@
                     <input type="email" class="form-control" id="email-input" aria-describedby="emailHelp" placeholder="Enter email" name="email" value="{{$tempCompany->email}}">
                 </div>
                 <div class="form-group mt-3">
-                    <img src="{{ asset('storage').'/'.$tempCompany->logo }}" alt="{{ 'logo '.$tempCompany->name }}" width="50%">
+                    <img src="{{ asset('storage').'/'.$tempCompany->logo }}" alt="{{ 'logo '.$tempCompany->name }}">
                 </div>
                 <div class=" form-group my-4">
                     <label for="logo-input">Logo</label>

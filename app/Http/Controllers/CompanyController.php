@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class CompanyController extends Controller
 {
@@ -38,6 +39,11 @@ class CompanyController extends Controller
     public function store(Request $request)
     {
         $data = $request->except("_token");
+
+        $validate = $this->validateCompany($request);
+        if ($validate->fails()) {
+            return redirect()->back()->withErrors($validate);
+        }
 
         if ($image = $request->file('logo')) {
             $data['logo'] = $image->store('companies', 'public');
@@ -80,6 +86,10 @@ class CompanyController extends Controller
      */
     public function update(Request $request, Company $company)
     {
+        $validate = $this->validateCompany($request);
+        if ($validate->fails()) {
+            return redirect()->back()->withErrors($validate);
+        }
         $data = $request->except(["_token", "_method"]);
         if ($request->hasFile('logo')) {
             $tempCompany = Company::findOrFail($company->id);
@@ -100,9 +110,26 @@ class CompanyController extends Controller
     public function destroy(Company $company)
     {
         $tempCompany = Company::findOrFail($company->id);
-        if (Storage::delete('public/' . $company->logo)) {
+        if (Storage::delete('public/' . $tempCompany->logo)) {
             Company::destroy($company->id);
         }
         return redirect('company');
+    }
+
+    /**
+     * Validate Company request conditions.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     */
+    public function validateCompany(Request $request)
+    {
+        $message = [
+            'required' => ':attribute es requerido',
+            'logo.dimensions' => 'Las dimension del logo deben ser 100x100'
+        ];
+
+        return Validator::make($request->all(), [
+            'logo' => ['required', 'Mimes:jpeg,jpg,gif,png', 'dimensions:width=100,height=100']
+        ], $message);
     }
 }

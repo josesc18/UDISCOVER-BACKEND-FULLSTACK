@@ -5,6 +5,13 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <h1>Añadir Compañia</h1>
+            @if($errors->any())
+            <ul>
+                @foreach($errors->all() as $error)
+                <li>{{$error}}</li>
+                @endforeach
+            </ul>
+            @endif
             <form enctype="multipart/form-data" method="POST" action="{{ route('company.store') }}">
                 @csrf
                 <div class="form-group mt-3">
